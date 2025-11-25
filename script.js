@@ -503,46 +503,74 @@ let a = [
     }
   ];
 
-// Create heading
 let h1 = document.createElement("h1");
-h1.id = "title";
-h1.style = "font-family:Times New Roman;text-align:center;margin-top:20px;";
-h1.innerText = "Pagination Using DOM";
+h1.setAttribute("id","title");
+h1.setAttribute("style","font-size:100px;font-family:Times New Roman;text-align:center;margin-top:20px;");
+
+h1.innerText="Pagination Using DOM";
 
 let d2 = document.createElement("p");
-d2.id = "description";
-d2.style = "font-size:30px;text-align:center;margin-top:20px;";
-d2.innerText = "With Responsive Table";
+d2.setAttribute("id","description");
+d2.setAttribute("style","font-size:50px;text-align:center;margin-top:20px;")
+d2.innerText="With Responsive Table";
 
-let d1 = document.createElement("div");
-d1.className = "table-responsive";
+  let d1 = document.createElement("div");
+
+  d1.setAttribute("class","table-responsive");
+
+  
 
 let t = document.createElement("table");
-t.className = "table table-bordered";
-t.id = "mytable";
+
+t.setAttribute("class","table table-bordered");
+
+t.setAttribute("id","mytable");
+
+
+
+
+
+
+
+let tr1 = document.createElement("tr");
+
+tr1.setAttribute("style","text-align:center;");
 
 let th = document.createElement("thead");
-th.innerHTML = "<tr><th>Id</th><th>Name</th><th>E-Mail</th></tr>";
 
 let tbody = document.createElement("tbody");
-tbody.id = "tab";
 
-t.append(th, tbody);
-d1.append(t);
+tbody.setAttribute("id","tab");
+
+let d3 = document.createElement("div");
+
+d3.setAttribute("class","d-flex justify-content-center");
+d3.setAttribute("id","buttons");
+d3.setAttribute("style","font-family:Times New Roman;");
+
+
+
+
+
 
 // Pagination buttons
-let d3 = document.createElement("div");
-d3.className = "d-flex justify-content-center";
-d3.id = "buttons";
-d3.style = "font-size:20px;font-family:Times New Roman;";
+
 d3.innerHTML = `
-  <button onclick="first()">First</button>
-  <button onclick="prev()">Previous</button>
-  <button onclick="next()">Next</button>
-  <button onclick="last()">Last</button>
+<button type="button" class="btn btn-outline-success" value="submit" onClick="first()" style="font-size:30px;">First</button> 
+
+<button type="button" class="btn btn-outline-success" value="submit" onClick="next()" style="font-size:30px;">Next</button> 
+<button type="button" class="btn btn-outline-success" value="submit" onClick="previous()" style="font-size:30px;">Previous</button> 
+<button type="button" class="btn btn-outline-success" value="submit" onClick="last()" style="font-size:30px;">Last</button> 
+
+
+  
 `;
 
-document.body.append(h1, d2, d1, d3);
+tr1.innerHTML = "<tr><th>Id</th><th>Name</th><th>E-Mail</th></tr>";
+
+th.append(tr1);
+t.append(th);
+
 
 // Pagination logic
 let currentPage = 1;
@@ -576,7 +604,7 @@ function next() {
   }
 }
 
-function prev() {
+function previous() {
   if (currentPage > 1) {
     currentPage--;
     renderTable(currentPage);
@@ -585,3 +613,8 @@ function prev() {
 
 // Initial render
 renderTable(currentPage);
+
+t.append(th, tbody);
+d1.append(t);
+
+document.body.append(h1, d2, d1, d3);
